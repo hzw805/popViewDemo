@@ -4,7 +4,7 @@
 代码调用简单易行 </br>
 
 #pragma mark -  普通面板模式
---(ZWNavbarMenu *)menu 
+-(ZWNavbarMenu *)menu 
 {
 	 
 	    if (_menu == nil) {
@@ -45,7 +45,7 @@
 	    }
 	  return _menu;
 }
--- (void)openMenu:(id)sender
+- (void)openMenu:(id)sender
 {
 
 	  [self.menu showMenu]; 
@@ -62,14 +62,14 @@
 	    return _slideView;
 }
 
--- (void)openSlideMenu:(id)sender
+- (void)openSlideMenu:(id)sender
 {
 
     [self.slideView showSlideMenuPanel];
 }
 
 #pragma mark - ZWSlideMenuPanelViewDelegate
--- (void)didSelectedMenu:(ZWSlideMenuPanelView *)slideMenuPanelView atIndex:(NSInteger)index inSection:(NSUInteger)section
+- (void)didSelectedMenu:(ZWSlideMenuPanelView *)slideMenuPanelView atIndex:(NSInteger)index inSection:(NSUInteger)section
 {
 		
 		    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"你点击了" message:[NSString stringWithFormat:@"section为%@的item%@", @(section+1),@(index+1)] delegate:nil cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
@@ -79,13 +79,13 @@
 
 #pragma mark - ZWSlideMenuPanelViewDataSource
 
--- (NSInteger)numberOfSectionsInSlideMenuPanelView:(ZWSlideMenuPanelView *)slideMenuPanelView
+- (NSInteger)numberOfSectionsInSlideMenuPanelView:(ZWSlideMenuPanelView *)slideMenuPanelView
 {
 
     return 2;
 }
 
--- (NSArray *)slideMenuPanelView:(ZWSlideMenuPanelView *)slideMenuPanelView menuItemsInSection:(NSInteger)section
+- (NSArray *)slideMenuPanelView:(ZWSlideMenuPanelView *)slideMenuPanelView menuItemsInSection:(NSInteger)section
 {
 		
 		NSMutableArray *items = [NSMutableArray array];
