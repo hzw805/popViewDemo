@@ -3,9 +3,9 @@
 
 代码调用简单易行 </br>
 
-#pragma mark -  普通面板模式
--(ZWNavbarMenu *)menu 
-{
+    #pragma mark -  普通面板模式
+	-(ZWNavbarMenu *)menu 
+	{
 	 
 	    if (_menu == nil) {
 	        
@@ -44,83 +44,83 @@
 	       
 	    }
 	  return _menu;
-}
-- (void)openMenu:(id)sender
-{
+	}
+	- (void)openMenu:(id)sender
+	{
+		[self.menu showMenu]; 
+	}
+	
+	#pragma mark -  滑动菜单模式
+	- (ZWSlideMenuPanelView *)slideView
+	{
+	
+		    if (_slideView == nil) {
+		        _slideView = [[ZWSlideMenuPanelView alloc] initWithTitle:@"网页提供者" delegate:self dataSource:self];
+		        _slideView.showSeparateLine = YES;
+		    }
+		    return _slideView;
+	}
 
-	  [self.menu showMenu]; 
-}
-#pragma mark -  滑动菜单模式
+	- (void)openSlideMenu:(id)sender{
+	
+	    [self.slideView showSlideMenuPanel];
+	    
+	}
 
--- (ZWSlideMenuPanelView *)slideView
-{
+	#pragma mark - ZWSlideMenuPanelViewDelegate
+	- (void)didSelectedMenu:(ZWSlideMenuPanelView *)slideMenuPanelView atIndex:(NSInteger)index inSection:(NSUInteger)section
+	{
+			
+			    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"你点击了" message:[NSString stringWithFormat:@"section为%@的item%@", @(section+1),@(index+1)] delegate:nil cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
+		        [av show];
+	}
 
-	    if (_slideView == nil) {
-	        _slideView = [[ZWSlideMenuPanelView alloc] initWithTitle:@"网页提供者" delegate:self dataSource:self];
-	        _slideView.showSeparateLine = YES;
+
+	#pragma mark - ZWSlideMenuPanelViewDataSource
+
+	- (NSInteger)numberOfSectionsInSlideMenuPanelView:(ZWSlideMenuPanelView *)slideMenuPanelView
+	{
+	
+	    return 2;
+	}
+
+	- (NSArray *)slideMenuPanelView:(ZWSlideMenuPanelView *)slideMenuPanelView menuItemsInSection:(NSInteger)section
+	{
+			
+			NSMutableArray *items = [NSMutableArray array];
+		    ZWSlideMenuItem *item1 = [ZWSlideMenuItem menuItem:@"新浪微博" icon:[UIImage imageNamed:@"0"]];
+		    [items addObject:item1];
+	    
+	
+			ZWSlideMenuItem *item2 = [ZWSlideMenuItem menuItem:@"腾讯微博" icon:[UIImage imageNamed:@"1"]];
+		    [items addObject:item2];
+	    
+		    ZWSlideMenuItem *item3 = [ZWSlideMenuItem menuItem:@"QQ空间" icon:[UIImage imageNamed:@"2"]];
+		    [items addObject:item3];
+	    
+		    ZWSlideMenuItem *item4 = [ZWSlideMenuItem menuItem:@"微信" icon:[UIImage imageNamed:@"3"]];
+		    [items addObject:item4];
+	    
+		    ZWSlideMenuItem *item5 = [ZWSlideMenuItem menuItem:@"朋友圈" icon:[UIImage imageNamed:@"4"]];
+		    [items addObject:item5];
+	    
+		    ZWSlideMenuItem *item6 = [ZWSlideMenuItem menuItem:@"QQ" icon:[UIImage imageNamed:@"5"]];
+		    [items addObject:item6];
+	    
+	    
+	    if (section == 0) {
+	        return items;
 	    }
-	    return _slideView;
-}
+	    
+	    else
+	    {
+	        [items removeLastObject];
+	        [items removeObjectAtIndex:0];
+	        return items;
+	    }
+	    return items;
+	}
 
-- (void)openSlideMenu:(id)sender
-{
-
-    [self.slideView showSlideMenuPanel];
-}
-
-#pragma mark - ZWSlideMenuPanelViewDelegate
-- (void)didSelectedMenu:(ZWSlideMenuPanelView *)slideMenuPanelView atIndex:(NSInteger)index inSection:(NSUInteger)section
-{
-		
-		    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"你点击了" message:[NSString stringWithFormat:@"section为%@的item%@", @(section+1),@(index+1)] delegate:nil cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
-	        [av show];
-}
-
-
-#pragma mark - ZWSlideMenuPanelViewDataSource
-
-- (NSInteger)numberOfSectionsInSlideMenuPanelView:(ZWSlideMenuPanelView *)slideMenuPanelView
-{
-
-    return 2;
-}
-
-- (NSArray *)slideMenuPanelView:(ZWSlideMenuPanelView *)slideMenuPanelView menuItemsInSection:(NSInteger)section
-{
-		
-		NSMutableArray *items = [NSMutableArray array];
-	    ZWSlideMenuItem *item1 = [ZWSlideMenuItem menuItem:@"新浪微博" icon:[UIImage imageNamed:@"0"]];
-	    [items addObject:item1];
-    
-
-		ZWSlideMenuItem *item2 = [ZWSlideMenuItem menuItem:@"腾讯微博" icon:[UIImage imageNamed:@"1"]];
-	    [items addObject:item2];
-    
-	    ZWSlideMenuItem *item3 = [ZWSlideMenuItem menuItem:@"QQ空间" icon:[UIImage imageNamed:@"2"]];
-	    [items addObject:item3];
-    
-	    ZWSlideMenuItem *item4 = [ZWSlideMenuItem menuItem:@"微信" icon:[UIImage imageNamed:@"3"]];
-	    [items addObject:item4];
-    
-	    ZWSlideMenuItem *item5 = [ZWSlideMenuItem menuItem:@"朋友圈" icon:[UIImage imageNamed:@"4"]];
-	    [items addObject:item5];
-    
-	    ZWSlideMenuItem *item6 = [ZWSlideMenuItem menuItem:@"QQ" icon:[UIImage imageNamed:@"5"]];
-	    [items addObject:item6];
-    
-    
-    if (section == 0) {
-        return items;
-    }
-    
-    else
-    {
-        [items removeLastObject];
-        [items removeObjectAtIndex:0];
-        return items;
-    }
-    return items;
-}
 
 
 
